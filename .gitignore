@@ -1,3 +1,6 @@
 *.ipynb
 /data
 /figures
+.DS_Store
+._.DS_Store
+/processed_training
