@@ -56,7 +56,7 @@ def find_one_grams(line):
     return d,lg
 
 
-f=open(os.getcwd()+'/partial_train_data/sws_train_5400.txt','r')
+f=open(os.getcwd()+'/partial_train_data/5400_sws_train.txt','r')
 # f=open(os.getcwd()+'/test_test.txt','r')
 
 tic = time.clock()
@@ -76,9 +76,9 @@ with open(os.getcwd()+'/processed_training/sws_train_5400_vocab.csv','a') as lg_
         csvwriter = csv.writer(lg_f, delimiter=' ',
                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
         for this_w in vocab:
-            csvwriter.writerow(w)
+            csvwriter.writerow([this_w])
 
-with open(os.getcwd()+'/processed_training/sws_54k.pkl', 'wb') as fp:
+with open(os.getcwd()+'/processed_training/sws_5400.pkl', 'wb') as fp:
     pickle.dump(dds, fp)
 
 # dds.to_csv(path_or_buf=os.getcwd()+'/one_word_grams_2500_train.txt',sep = ' ',index= False)
