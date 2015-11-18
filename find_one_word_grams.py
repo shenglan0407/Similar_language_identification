@@ -3,7 +3,7 @@
 #
 # Author: Shenglan Qiao
 # 
-# builds the sparse matrix for 1-word n-grams
+# finds word 1-gram 
 #
 #############################################################################
 
@@ -11,7 +11,6 @@
 ##############################################################################
 # Imports
 ##############################################################################
-import pandas as pd
 import numpy as np
 import time
 import os
@@ -56,12 +55,10 @@ def find_one_grams(line):
     return d,lg
 
 
-f=open(os.getcwd()+'/partial_train_data/5400_sws_train.txt','r')
-# f=open(os.getcwd()+'/test_test.txt','r')
+f=open(os.getcwd()+'/partial_train_data/54k_sws_train.txt','r')
 
 tic = time.clock()
 
-# dds = pd.DataFrame()
 dds= []
 lgs = []
 for line in f:
@@ -81,7 +78,6 @@ with open(os.getcwd()+'/processed_training/sws_train_5400_vocab.csv','a') as lg_
 with open(os.getcwd()+'/processed_training/sws_5400.pkl', 'wb') as fp:
     pickle.dump(dds, fp)
 
-# dds.to_csv(path_or_buf=os.getcwd()+'/one_word_grams_2500_train.txt',sep = ' ',index= False)
 toc = time.clock()
 print "total time for process is %.2f seconds." % (toc-tic)
 
