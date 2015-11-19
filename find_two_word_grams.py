@@ -64,8 +64,8 @@ def find_two_grams(line):
                 d.update({number:a[0]})
     return d,lg
 
-# f=open(os.getcwd()+'/partial_train_data/54k_sws_train.txt','r')
-f=open(os.getcwd()+'/partial_train_data/test.txt','r')
+f=open(os.getcwd()+'/partial_train_data/5400_sws_train.txt','r')
+# f=open(os.getcwd()+'/partial_train_data/test.txt','r')
 tic = time.clock()
 
 dds= []
@@ -74,13 +74,13 @@ for line in f:
     dds.append(d)
 print dds
 
-with open(os.getcwd()+'/processed_training/test_bigram_vocab.csv','a') as lg_f:
+with open(os.getcwd()+'/processed_training/sws_train_5400_bigram_vocab.csv','a') as lg_f:
         csvwriter = csv.writer(lg_f, delimiter=' ',
                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
         for this_w in vocab:
             csvwriter.writerow([this_w])
 
-with open(os.getcwd()+'/processed_training/test_bigram.pkl', 'wb') as fp:
+with open(os.getcwd()+'/processed_training/sws_train_5400_bigram.pkl', 'wb') as fp:
     pickle.dump(dds, fp)
     
 toc = time.clock()
