@@ -34,7 +34,7 @@ all_lg = ['bs','hr','sr']
 
 test_labels=[]
 test_examples=[]
-
+count = 0
 for line in test_f:
 
     count +=1
@@ -72,7 +72,7 @@ for line in test_f:
     test_examples.append(test)
 
 # pickle the test example dictionaries
-with open(os.getcwd()+'/processed_test/sws_test-gold.pkl', 'wb') as fp:
-    pickle.dump(dds, fp)
+with open(os.getcwd()+'/processed_test/sws_m5400_test-gold.pkl', 'wb') as fp:
+    pickle.dump(test_examples, fp)
 
 
