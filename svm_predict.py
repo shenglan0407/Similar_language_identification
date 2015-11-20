@@ -28,10 +28,10 @@ from liblinearutil import *
 ##############################################################################
 
 # load model
-m=load_model(os.getcwd()+'/trained_models/sws_5400.model')
+m=load_model(os.getcwd()+'/trained_models/sws_bigram_5400.model')
 
 #load test examples and their labels
-test_examples = pickle.load(open(os.getcwd()+'/processed_test/sws_m5400_test-gold.pkl', 'r'))
+test_examples = pickle.load(open(os.getcwd()+'/processed_test/sws_m2w_5400_test-gold.pkl', 'r'))
 test_labels=[]
 with open(os.getcwd()+'/processed_test/sws_labels_test-gold.csv','r') as f:
     csvreader = csv.reader(f, delimiter=' ', quotechar='|')
