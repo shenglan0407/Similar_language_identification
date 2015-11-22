@@ -16,20 +16,39 @@ import time
 import os
 import pickle
 import csv
+
+##############################################################################
+# Parameters
+##############################################################################
+
+# if true, will write the label to the test set to a .csv file
+# only need to make true if it's the first test processing the test set
+write_labels = False
+
+# if ture, process the test set assuming bigrams are features
+is_bigram = True
+
+# path to where the vocab for this classifier is saved
+vocab_file = os.getcwd()+'/processed_training/sws_train_54k_bigram_vocab.csv'
+
+# where to save the processed test examples
+# naming convention: LanguageGroup_model_numberOfExamples_TestSet.pkl.
+# e.g.  sws_m2w_54k_test-gold.pkl means southwest slavic group, modle with word bigrams
+# 54k examples and from test set 'test-gold'
+save_path = os.getcwd()+'/processed_test/sws_m2w_54k_test-gold.pkl'
+
 ##############################################################################
 # Code
 ##############################################################################
 
-write_labels = False
-is_bigram = True
-
 # load the vocabulary learnt from training set
-with open(os.getcwd()+'/processed_training/sws_train_5400_bigram_vocab.csv', 'r') as f:
+with open(vocab_file, 'r') as f:
     vocab = []
     csvreader =  csv.reader(f, delimiter=' ', quotechar='|')
     for row in csvreader:
         vocab.append(row[0])
 
+# file that contains the test set
 test_f=open(os.getcwd()+'/data/sws_test-gold.txt','r')
 
 # language present in test set
@@ -44,6 +63,7 @@ for line in test_f:
     line=line.split()
     words=line[:-1]
     lg=line[-1]
+    # record labels of of test set if write_labels is true
     if write_labels:
         if lg == all_lg[0]:
             lg = 1
@@ -62,6 +82,7 @@ for line in test_f:
     test={}
     # keep track of words we have already see in the example
     temp = []
+    # if is_gram is true, look for bigrams in test examples
     if is_bigram:
         bigrams = ['%s %s'%(words[ii],words[ii+1]) for ii in range(len(words)-1)]
         bigrams.append('#begin#' + words[0])
@@ -77,7 +98,7 @@ for line in test_f:
                 if gram in vocab:
                     number = np.where(np.array(vocab)==gram)[0][0]+1
                     test.update({number:1})
-    
+    # if is_bigram is false, look for one-grams in test examples
     else:
         for word in words:
             if word in temp:
@@ -92,7 +113,7 @@ for line in test_f:
     test_examples.append(test)
 
 # pickle the test example dictionaries
-with open(os.getcwd()+'/processed_test/sws_m2w_5400_test-gold.pkl', 'wb') as fp:
+with open(save_path, 'wb') as fp:
     pickle.dump(test_examples, fp)
 
 
