@@ -23,17 +23,25 @@ sys.path.insert(0, '/srv/zfs01/user_data/shenglan/liblinear-2.1/python')
 
 import liblinear
 from liblinearutil import *
+
+##############################################################################
+# Parameters
+##############################################################################
+
+# path to processed test data
+test_examples = pickle.load(open(os.getcwd()+'/processed_test/sws_m2w_54k_test-gold.pkl', 'r'))
+
+# path to file containing labels for test data
+label_path = os.getcwd()+'/processed_test/sws_labels_test-gold.csv'
+
+# load model to used (must match the one used to process test data)
+m=load_model(os.getcwd()+'/trained_models/sws_m2w_54k.model')
 ##############################################################################
 # Code
 ##############################################################################
-
-# load model
-m=load_model(os.getcwd()+'/trained_models/sws_bigram_5400.model')
-
-#load test examples and their labels
-test_examples = pickle.load(open(os.getcwd()+'/processed_test/sws_m2w_5400_test-gold.pkl', 'r'))
+# test example labels labels
 test_labels=[]
-with open(os.getcwd()+'/processed_test/sws_labels_test-gold.csv','r') as f:
+with open(label_path,'r') as f:
     csvreader = csv.reader(f, delimiter=' ', quotechar='|')
     for row in csvreader:
           test_labels.append(int(row[0]))
