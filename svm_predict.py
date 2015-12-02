@@ -29,16 +29,16 @@ from liblinearutil import *
 ##############################################################################
 
 # path to processed test data
-test_examples = pickle.load(open(os.getcwd()+'/processed_test/sws_m1w_54k_test-gold.pkl', 'r'))
+test_examples = pickle.load(open(os.getcwd()+'/processed_test/sws_m1wreduced_5400_test-gold.pkl', 'r'))
 
 # path to file containing labels for test data
 label_path = os.getcwd()+'/processed_test/sws_labels_test-gold.csv'
 
 # load model to used (must match the one used to process test data)
-m=load_model(os.getcwd()+'/trained_models/sws_m1w_54k.model')
+m=load_model(os.getcwd()+'/trained_models/sws_m1wreduced_5400.model')
 
 # path to save confusion matrix
-ConfMat_path = os.getcwd()+'/test_results/sws_m1w_54k_ConfMat_test-gold.csv'
+ConfMat_path = os.getcwd()+'/test_results/sws_m1wreduced_54k_ConfMat_test-gold.csv'
 ##############################################################################
 # Code
 ##############################################################################

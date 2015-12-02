@@ -28,14 +28,14 @@ from liblinearutil import *
 ##############################################################################
 
 # path to processed training data
-train_data =  pickle.load(open(os.getcwd()+'/processed_training/sws_train_54k_bigram.pkl', 'r'))
+train_data =  pickle.load(open(os.getcwd()+'/processed_training/sws_train_5400_1gram_reduced_vocab.pkl', 'r'))
 # path to file containing labels for training data
-label_path = os.getcwd()+'/processed_training/sws_labels_54k.csv'
+label_path = os.getcwd()+'/processed_training/sws_labels_5400.csv'
 # where to save the svm model
 # naming convention: LanguageGroup_model_numberOfExamples.model.
 # e.g.  sws_m2w_54k.model means southwest slavic group, modle with word bigrams
 # and trained with 54k examples
-save_path = os.getcwd()+'/trained_models/sws_m2w_54k.model'
+save_path = os.getcwd()+'/trained_models/sws_m1wreduced_5400.model'
 ##############################################################################
 # Code
 ##############################################################################

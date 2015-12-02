@@ -26,16 +26,16 @@ import csv
 write_labels = False
 
 # if ture, process the test set assuming bigrams are features
-is_bigram = True
+is_bigram = False
 
 # path to where the vocab for this classifier is saved
-vocab_file = os.getcwd()+'/processed_training/sws_train_54k_bigram_vocab.csv'
+vocab_file = os.getcwd()+'/processed_training/sws_train_5400_1gram_vocab_reduced.csv'
 
 # where to save the processed test examples
 # naming convention: LanguageGroup_model_numberOfExamples_TestSet.pkl.
 # e.g.  sws_m2w_54k_test-gold.pkl means southwest slavic group, modle with word bigrams
 # 54k examples and from test set 'test-gold'
-save_path = os.getcwd()+'/processed_test/sws_m2w_54k_test-gold.pkl'
+save_path = os.getcwd()+'/processed_test/sws_m1wreduced_5400_test-gold.pkl'
 
 ##############################################################################
 # Code
