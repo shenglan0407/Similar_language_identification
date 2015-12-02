@@ -25,8 +25,9 @@ vocab=[]
 
 with open(os.getcwd()+'/processed_training/sws_train_5400_1gram_vocab_reduced.csv', 'r') as csvfile:
     for row in csvfile:
-        word = row.decode('utf-8').split()[0]
+        word = row.split()[0]
         vocab.append(word)
+
 
 def find_one_grams(line):
     words = line.split()
@@ -48,9 +49,10 @@ def find_one_grams(line):
             pass
         else:
             temp.append(gram)
-            number = int(np.where(np.array(vocab)==gram)[0][0]+1)
-            a = np.array([1],dtype=np.int8)
-            d.update({number:a[0]})
+            if gram in vocab:
+                number = int(np.where(np.array(vocab)==gram)[0][0]+1)
+                a = np.array([1],dtype=np.int8)
+                d.update({number:a[0]})
            
     return d,lg
 
@@ -61,18 +63,12 @@ f=open(os.getcwd()+'/partial_train_data/5400_sws_train.txt','r')
 tic = time.clock()
 
 dds= []
-lgs = []
+
 for line in f:
     d,_ = find_one_grams(line)
     dds.append(d)
 
-with open(os.getcwd()+'/processed_training/sws_train_5400_reduced_vocab.csv','a') as lg_f:
-        csvwriter = csv.writer(lg_f, delimiter=' ',
-                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
-        for this_w in vocab:
-            csvwriter.writerow([this_w])
-
-with open(os.getcwd()+'/processed_training/sws_train_54k.pkl', 'wb') as fp:
+with open(os.getcwd()+'/processed_training/sws_train_5400_1gram_reduced_vocab.pkl', 'wb') as fp:
     pickle.dump(dds, fp)
 
 toc = time.clock()
