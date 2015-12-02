@@ -29,13 +29,16 @@ from liblinearutil import *
 ##############################################################################
 
 # path to processed test data
-test_examples = pickle.load(open(os.getcwd()+'/processed_test/sws_m2w_54k_test-gold.pkl', 'r'))
+test_examples = pickle.load(open(os.getcwd()+'/processed_test/sws_m1w_54k_test-gold.pkl', 'r'))
 
 # path to file containing labels for test data
 label_path = os.getcwd()+'/processed_test/sws_labels_test-gold.csv'
 
 # load model to used (must match the one used to process test data)
-m=load_model(os.getcwd()+'/trained_models/sws_m2w_54k.model')
+m=load_model(os.getcwd()+'/trained_models/sws_m1w_54k.model')
+
+# path to save confusion matrix
+ConfMat_path = os.getcwd()+'/test_results/sws_m1w_54k_ConfMat_test-gold.csv'
 ##############################################################################
 # Code
 ##############################################################################
@@ -55,3 +58,15 @@ correct = sum([1.0 for labels in zip(predicted_labels,test_labels) if labels[0]=
 accuracy = correct/len(predicted_labels)
 
 print "The accuracy from this classifier is %.2f" % accuracy
+
+# make confusion matrix
+confusion_matrix = np.zeros((3,3))
+for labels in zip(predicted_labels,test_labels):
+    confusion_matrix[labels[1]-1,labels[0]-1] += 1
+
+with open(ConfMat_path, 'wb') as csvfile:
+    csvwriter = csv.writer(csvfile, delimiter=' ',
+                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    csvwriter.writerow(['bs','hr','sr'])
+    for row in confusion_matrix:
+        csvwriter.writerow(row)
