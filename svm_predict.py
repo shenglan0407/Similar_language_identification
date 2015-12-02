@@ -29,16 +29,19 @@ from liblinearutil import *
 ##############################################################################
 
 # path to processed test data
-test_examples = pickle.load(open(os.getcwd()+'/processed_test/sws_m1wreduced_5400_test-gold.pkl', 'r'))
+test_examples = pickle.load(open(os.getcwd()+'/processed_test/sws_m2w_5400_test-gold.pkl', 'r'))
 
 # path to file containing labels for test data
 label_path = os.getcwd()+'/processed_test/sws_labels_test-gold.csv'
 
 # load model to used (must match the one used to process test data)
-m=load_model(os.getcwd()+'/trained_models/sws_m1wreduced_5400.model')
+m=load_model(os.getcwd()+'/trained_models/sws_m2w_5400.model')
 
 # path to save confusion matrix
-ConfMat_path = os.getcwd()+'/test_results/sws_m1wreduced_54k_ConfMat_test-gold.csv'
+ConfMat_path = os.getcwd()+'/test_results/sws_m2w_5400_ConfMat_test-gold.csv'
+
+# path to save predicted labels
+predicted_labels_path = os.getcwd()+'/test_results/sws_m2w_5400_PredLab_test-gold.csv'
 ##############################################################################
 # Code
 ##############################################################################
@@ -70,3 +73,8 @@ with open(ConfMat_path, 'wb') as csvfile:
     csvwriter.writerow(['bs','hr','sr'])
     for row in confusion_matrix:
         csvwriter.writerow(row)
+# write predicted_labels to file
+with open(predicted_labels_path, 'wb') as csvfile:
+    csvwriter = csv.writer(csvfile, delimiter=' ',
+                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    csvwriter.writerow(predicted_labels)
