@@ -8,8 +8,10 @@ import operator
 import csv
 import sys
 import getopt
+import gc
 
 sys.path.insert(0, '/Users/shenglanqiao/Documents/Classes/CS229/liblinear-2.1/python')
+sys.path.insert(0, '/srv/zfs01/user_data/shenglan/liblinear-2.1/python')
 
 import liblinear
 
@@ -147,18 +149,17 @@ def fileToFeatureVector(f, P=5):
     print 'Loading took ', time.time() - start_time
     return X,y
     
-def AccuracyByFeatureNum(num_grams):
+def AccuracyByFeatureNum():
     f_test = open(os.getcwd()+'/devel_data/sws_devel.txt','r')
     f_train = open(os.getcwd()+'/partial_train_data/54k_sws_train.txt','r')
 
-    r_associationNgrams.update({k: associationNgrams[k] for k in \
-     np.array(sorted_tfidf[-num_grams:])[:,0]})
 
     X_train,y_train = fileToFeatureVector(f_train, P = Ngrams)
     X_test, y_test = fileToFeatureVector(f_test, P = Ngrams)
-
+    
+    param = parameter('-c 0.001')
     p = problem(y_train, X_train)
-    m = train(p)
+    m = train(p,param)
     print 'test accuracy:'
     prediction, testing_accuracy, _ = predict(y_test, X_test, m)
     print 'training accuray:'
@@ -174,7 +175,7 @@ def AccuracyByFeatureNum(num_grams):
     f_test.close()
     
 def usage():
-    print 'tf_idf_analysis.py -c <CharOrWord> -n <NumGrams>'
+    print 'tf_idf_analysis.py -c <CharOrWord> -n <NumGrams> -t <TopGrams>'
 
 
 
@@ -183,9 +184,10 @@ if __name__ == "__main__":
     argv = sys.argv[1:]
     char_gram = True
     Ngrams = 1
+    top_gram = 100
     
     try:
-        opts, args = getopt.getopt(argv,"hc:n:",["CharOrWord","NumGrams"])
+        opts, args = getopt.getopt(argv,"hc:n:t:",["CharOrWord","NumGrams","TopGrams"])
     except getopt.GetoptError:
         usage()
         sys.exit(2)
@@ -205,6 +207,8 @@ if __name__ == "__main__":
                 sys.exit(2)
         elif opt in ("-n","--NumGrams"):
             Ngrams = int(arg)
+        elif opt in ("-t","--TopGrams"):
+            Top_grams = int(arg)
     
     
     if char_gram:
@@ -238,16 +242,15 @@ if __name__ == "__main__":
     test_accuracies = []
     test_labels = []
     preds = [] 
-
-
-    n_grams_to_use = [10,50, 100, 200,\
-                  400,600,800,1000,1500,2000,\
-                 5000,10000,20000,30000,40000,50000,60000,70000,100000]
-
+    
+    n_grams_to_use = [400,600,800,1000,1500,2000,\
+                    5000,10000,20000,30000,40000,50000,60000,70000,100000]
     for item in n_grams_to_use:
-        r_associationNgrams = {}
-        AccuracyByFeatureNum(item)
-        
+        r_associationNgrams = {k: associationNgrams[k] for k in \
+         np.array(sorted_tfidf[-item:])[:,0]}
+        AccuracyByFeatureNum()
+        gc.collect()
+    
     results_to_save = {'tr_ac' : np.array(train_accuracies)
     ,'te_ac' : np.array(test_accuracies)
     , 'test_labels' : test_labels
