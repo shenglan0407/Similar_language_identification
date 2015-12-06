@@ -5,3 +5,4 @@
 ._.DS_Store
 /processed_training
 *.o*
+/test_results/sws_reduced_features.pkl
