@@ -3,9 +3,9 @@
 #
 # Author: Shenglan Qiao
 # 
-# This script takes the word count data and identify the most frequently occuring
-# word for each language. 
-#
+# Assigns test examples to language group using the word frequency method
+# Outputs a confusion matrix for individual language as well
+# 
 #############################################################################
 
 
