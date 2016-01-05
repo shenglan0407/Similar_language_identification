@@ -16,10 +16,8 @@ sys.path.insert(0, '/srv/zfs01/user_data/shenglan/liblinear-2.1/python')
 import liblinear
 
 from liblinearutil import *
-
-languages = ['bs','hr','sr']
-
-associationTable = {'bs': 1, 'hr': 2, 'sr': 3}
+languages = ['cz','sk','bs','hr','sr']
+associationTable = {'cz': 0, 'sk' : 1,'bs': 2, 'hr': 3, 'sr': 4}
 
 def getNgramsWordTfDfExtractor(p):
     def getNgrams(s,doc_count):
@@ -150,14 +148,14 @@ def fileToFeatureVector(f, P=5):
     return X,y
     
 def AccuracyByFeatureNum():
-    f_test = open(os.getcwd()+'/devel_data/sws_devel.txt','r')
-    f_train = open(os.getcwd()+'/partial_train_data/54k_sws_train.txt','r')
+    f_test = open(os.getcwd()+'/devel_data/ws_sws_devel.txt','r')
+    f_train = open(os.getcwd()+'/partial_train_data/90k_sws_ws_train.txt','r')
 
 
     X_train,y_train = fileToFeatureVector(f_train, P = Ngrams)
     X_test, y_test = fileToFeatureVector(f_test, P = Ngrams)
     
-    param = parameter('-c 0.001')
+    param = parameter('-c 0.01')
     p = problem(y_train, X_train)
     m = train(p,param)
     print 'test accuracy:'
@@ -208,7 +206,7 @@ if __name__ == "__main__":
         elif opt in ("-n","--NumGrams"):
             Ngrams = int(arg)
         elif opt in ("-t","--TopGrams"):
-            Top_grams = int(arg)
+            top_grams = int(arg)
     
     
     if char_gram:
@@ -222,12 +220,12 @@ if __name__ == "__main__":
 
     count = [0]
     
-    f_train = open(os.getcwd()+'/partial_train_data/54k_sws_train.txt','r')
+    f_train = open(os.getcwd()+'/partial_train_data/90k_sws_ws_train.txt','r')
     n_doc = sum([1 for line in f_train])
     print 'there are %d documents' % n_doc
     f_train.close()
 
-    f_train = open(os.getcwd()+'/partial_train_data/54k_sws_train.txt','r')
+    f_train = open(os.getcwd()+'/partial_train_data/90k_sws_ws_train.txt','r')
 
     fileToTfDf(f_train,P = Ngrams)
 
@@ -243,7 +241,7 @@ if __name__ == "__main__":
     test_labels = []
     preds = [] 
     
-    n_grams_to_use = [400,600,800,1000,1500,2000,\
+    n_grams_to_use = [400,800,1200,1600,2000,\
                     5000,10000,20000,30000,40000,50000,60000,70000,100000]
     for item in n_grams_to_use:
         r_associationNgrams = {k: associationNgrams[k] for k in \
@@ -259,8 +257,8 @@ if __name__ == "__main__":
     }
     
     if char_gram:
-        pickle.dump(results_to_save,open(os.getcwd()+('/test_results/sws_char_%d-gram_tfidf.pkl' % Ngrams),'wb'))
+        pickle.dump(results_to_save,open(os.getcwd()+('/test_results/sws_ws_char_%d-gram_tfidf.pkl' % Ngrams),'wb'))
     else:
-        pickle.dump(results_to_save,open(os.getcwd()+('/test_results/sws_word_%d-gram_tfidf.pkl' % Ngrams),'wb'))
+        pickle.dump(results_to_save,open(os.getcwd()+('/test_results/sws_ws_word_%d-gram_tfidf.pkl' % Ngrams),'wb'))
    
 

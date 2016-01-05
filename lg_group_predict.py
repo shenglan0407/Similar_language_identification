@@ -31,8 +31,10 @@ freq_list = []
 
 # group labels
 
-lg_groups = [['cz','sk'], ['bs','hr','sr']\
-,['bg','mk'],['esar','eses'],['ptbr','ptpt'],['id','my']]
+lg_groups = {'ws':['cz','sk'], 'sws':['bs','hr','sr']\
+,'ses':['bg','mk'],'sp':['esar','eses'],'pt':['ptbr','ptpt'],'aus':['id','my']}
+
+# sws_ws_group = ['cz','sk','bs','hr','sr']
 
 for ii in range(n_lgs):
     lg = reader.next()[None][0]
@@ -76,10 +78,13 @@ for line in test_set:
         confusion_matrix[actual_label][predict] +=1
         
         predicted_lg = lgs[predict]
-        for this_group in lg_groups:
-            if (predicted_lg in this_group) and (lg_label in this_group):
-                with open(os.getcwd()+'/data/correct_group_test-gold_2.txt','a') as output:
+        for this_key in lg_groups.keys():
+            if predicted_lg in lg_groups[this_key]:
+                with open(os.getcwd()+'/data/'+this_key+'_lg_group_test-gold.txt','a') as output:
                     output.write(line)
+#         if (predicted_lg in sws_ws_group) and (lg_label in sws_ws_group):
+#             with open(os.getcwd()+'/data/sws_ws_correct_group_test-gold.txt','a') as output:
+#                 output.write(line)
            
         
         
