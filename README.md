@@ -18,6 +18,14 @@ Write about organization of this repo
 ## Usage
 How to use the code
 
+## Contributing
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request
+
 ## Credit
 Daniel Levy and Shenglan Qiao (the Authors) contributed equally to this project.
+
 Copyright 2015 Stanford University and the Authors
