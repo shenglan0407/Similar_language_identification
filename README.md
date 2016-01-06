@@ -12,6 +12,12 @@ We demonstrate our method by contributing to the DSL-2015 Shared Task. More info
 
 Our approach for classification is a two-level hierarchy. We first identify if a sentence belongs to a language group, which is trivial and can be done with a simple method. Within each language group, we then train a support vector machine or ensembles of SVMs to pinpoint which language to label the sentence. This method is easily scalable to include tens and hundreds of languages and incorporate more training data. At the langugae group level, training the classifier involves word-counting and identifying most common words within languages; this can be scaled up using a cluster file system and a MapReduce program. Within each language group, there are typically only 2 to 3 languages; this also makes parallelization easy and the number of features used in SVMs well-controlled.
 
+## Organization
+Write about organization of this repo
 
+## Usage
+How to use the code
 
+## Credit
+Daniel Levy and Shenglan Qiao (the Authors) contributed equally to this project.
 Copyright 2015 Stanford University and the Authors
