@@ -6,6 +6,4 @@
 /processed_training
 *.o*
 /test_results/sws_reduced_features.csv
-*.png
-*.jpeg
 *.sty
