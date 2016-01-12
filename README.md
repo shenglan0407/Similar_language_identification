@@ -31,18 +31,16 @@ We tested our method with 1000 test examples per language, using [this dataset](
 Group accuracy represents the fraction of test examples correctly classified into their respective language groups during the first step of the hierarchical method. The upshot is using only the 1000 most frequently used words, a small fraction of all available vocabulary in each language, we can achieve near perfect accuracy distinguishing between language groups (we choose to combine the South-western Slavic and the West Slavic groups into one group as that increases our final accuracy). The final accuracy indicates the fraction of test examples correctly labeled by language after the second step of our methods involving ensemble SVMs. After impelmenting a feature selection procedure with a tfidf-type ranking index, the number of features for these SVMs within language groups are in the order of tens of thousands, which are very manageable and do not require extraordinary computation resources. In short, in designing our method we try to make it efficient and scalable. Details on the method are in our [paper](https://github.com/shenglan0407/Similar_language_identification/blob/master/writing/final.pdf)
 
 
-## Organization
-Write about organization of this repo
+## Workflow
+We summary the workflow for training and testing our system here. (TODO: make sure all scripts are "runable" and make diagram)
 
-## Usage
-How to run the code: currently a demo and not meant for general usage
+1. Remove special characters, punctuations, and digits from training, test, and devel datasets. Change all letters to lowercase (remove_punc_digit_lowercase.py)
+ 
+2. Count all unique words from the training set ({"word": number of occurances}) and organize by language (count_word_frequncy.py). Compute the most-frequently used 1000 words per language (find_top_words.py). This is for classifying test and devel examples into language groups.
 
-## Contributing
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request
+3. Create training sets by language groups for training SVMs within language groups (generate_partial_train.py). For each language group, train SVMs using different tokens (svm_train.py).
+
+4. 
 
 ## Credit
 Daniel Levy and Shenglan Qiao (the Authors) contributed equally to this project.
