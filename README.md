@@ -40,7 +40,11 @@ We summary the workflow for training and testing our system here. (TODO: make su
 
 3. Create training sets by language groups for training SVMs within language groups (generate_partial_train.py). For each language group, train SVMs using different tokens (svm_train.py).
 
-4. 
+4. Using the devel dataset, predict the labels of  
+
+4. Rank features by tf-idf scores (tf_idf_analysis.py) and retrain SVMs with only top-ranked features. This avoids overfitting and renders robustness to our method.
+
+5. Within language groups, combine decisions  
 
 ## Credit
 Daniel Levy and Shenglan Qiao (the Authors) contributed equally to this project.
