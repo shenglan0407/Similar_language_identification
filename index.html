@@ -1,34 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <meta charset="UTF-8">
+    <title>Similar Language Detection by shenglan0407</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <title>Similar Language Detection by shenglan0407</title>
   </head>
-
   <body>
-    <header>
-      <div class="inner">
-        <h1>Similar Language Detection</h1>
-        <h2> A machine learning system for classifying texts written in similar languages.</h2>
-        <a href="https://github.com/shenglan0407/Similar_language_identification" class="button"><small>View project on</small> GitHub</a>
-      </div>
-    </header>
+    <section class="page-header">
+      <h1 class="project-name">Similar Language Detection</h1>
+      <h2 class="project-tagline"> A machine learning system for classifying texts written in similar languages.</h2>
+      <a href="https://github.com/shenglan0407/Similar_language_identification" class="btn">View on GitHub</a>
+      <a href="https://github.com/shenglan0407/Similar_language_identification/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/shenglan0407/Similar_language_identification/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h2>
+    <section class="main-content">
+      <h2>
 <a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
 
 <p>This is a machine learning system that demonstrates a novel hierarchical method to classify sentences written in very similar languages or variations of languages. It was done as a term project for CS229 Machine Learning at Stanford University in Fall 2015. The repository contains training and testing data we used to develop the system, code, and a paper presenting our findings. The hierarchical nature of our system renders it robustness and scalability as well as competitive accuracy of classification.</p>
@@ -81,6 +72,8 @@
 
 <p><img src="https://github.com/shenglan0407/Similar_language_identification/blob/master/writing/Final_confusion_matrix.png" alt="confusion matrix"></p>
 
+<p><img src="http://agriculture.vic.gov.au/__data/assets/image/0005/182390/rabbit_img1.jpg" alt="rabbit"></p>
+
 <p>Group accuracy represents the fraction of test examples correctly classified into their respective language groups during the first step of the hierarchical method. The upshot is using only the 1000 most frequently used words, a small fraction of all available vocabulary in each language, we can achieve near perfect accuracy distinguishing between language groups (we choose to combine the South-western Slavic and the West Slavic groups into one group as that increases our final accuracy). The final accuracy indicates the fraction of test examples correctly labeled by language after the second step of our methods involving ensemble SVMs. After implementing a feature selection procedure with a tfidf-type ranking index, the number of features for these SVMs within language groups are in the order of tens of thousands, which are very manageable and do not require extraordinary computation resources. In short, in designing our method we try to make it efficient and scalable. Details on the method are in our <a href="https://github.com/shenglan0407/Similar_language_identification/blob/master/writing/final.pdf">paper</a></p>
 
 <h2>
@@ -98,24 +91,14 @@
 <p>Daniel Levy and Shenglan Qiao (the Authors) contributed equally to this project.</p>
 
 <p>Copyright 2015 Stanford University and the Authors</p>
-        </section>
 
-        <aside id="sidebar">
-          <a href="https://github.com/shenglan0407/Similar_language_identification/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/shenglan0407/Similar_language_identification/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/shenglan0407/Similar_language_identification">Similar Language Detection</a> is maintained by <a href="https://github.com/shenglan0407">shenglan0407</a>.</span>
 
-          <p class="repo-owner"><a href="https://github.com/shenglan0407/Similar_language_identification"></a> is maintained by <a href="https://github.com/shenglan0407">shenglan0407</a>.</p>
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
 
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div>
+    </section>
 
   
   </body>
