@@ -32,19 +32,11 @@ Group accuracy represents the fraction of test examples correctly classified int
 
 
 ## Workflow
-We summary the workflow for training and testing our system here. (TODO: make sure all scripts are "runable" and make diagram)
+The diagram below summarises the basic steps to go from a training corpus to our validated hierarchical method that will automatically detect the language a sentence is written in. 
 
-1. Remove special characters, punctuations, and digits from training, test, and devel datasets. Change all letters to lowercase (remove_punc_digit_lowercase.py)
- 
-2. Count all unique words from the training set ({"word": number of occurances}) and organize by language (count_word_frequncy.py). Compute the most-frequently used 1000 words per language (find_top_words.py). This is for classifying test and devel examples into language groups.
+![workflow](https://github.com/shenglan0407/Similar_language_identification/blob/master/writing/workflow_diagram.png)
 
-3. Create training sets by language groups for training SVMs within language groups (generate_partial_train.py). For each language group, train SVMs using different tokens (svm_train.py).
-
-4. Using the devel dataset, predict the labels of  
-
-4. Rank features by tf-idf scores (tf_idf_analysis.py) and retrain SVMs with only top-ranked features. This avoids overfitting and renders robustness to our method.
-
-5. Within language groups, combine decisions  
+The language group classifer (word freqnuency) and the individual language classifier (ensemble SVM) are first trained. They are then validated and fine tuned using the devel data before being deployed to predict the labels of the test data. A user can use the python scripts in this repository to train her own system.
 
 ## Credit
 Daniel Levy and Shenglan Qiao (the Authors) contributed equally to this project.
